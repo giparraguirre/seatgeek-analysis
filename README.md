@@ -21,7 +21,7 @@ Things to know:
   - **Events older than the window.** Only the last 30 days are retained (2026-08-13 to 2026-09-11), so events first seen earlier are missing. Unmatched IDs such as 17565118 fit this case.
   - **The match is all-or-nothing by day.** On 26 of 30 days no listing matches an event; on the other 4, every listing does.
 
-  Any analysis that needs event context (type, venue, performer) should use only the 4,000 matched listings. Listing-only analysis (`dealBucket`, `marketplace`, `deliveryType`, section, quantity) can use all 30,000.
+  Any analysis that needs event context (type, venue, performer) should use only the 4,000 matched listings. All 32 matched events are NBA games with exactly two performers, so event-level results cannot compare sports. Listing-only analysis (`dealBucket`, `marketplace`, `deliveryType`, section, quantity) can use all 30,000.
 - **Premium fields are masked.** Columns marked 🔒 (listing `price`, `priceWithFees`, `fee`, `dealScore`; event price and count fields; performer image URLs) contain only `[PREMIUM]`. `src/clean.py` drops them. Deal quality comes from `dealBucket` instead.
 
 ### License and citation
