@@ -1,7 +1,10 @@
-# Data (keep folders, ignore contents)
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep
+# Data (keep folders and docs, ignore raw/processed data files)
+data/raw/**/*.parquet
+data/raw/**/*.csv
+data/processed/**/*.parquet
+data/processed/**/*.csv
+!data/raw/DATASET_README.md
+!data/raw/**/schema.json
 !data/processed/.gitkeep
 
 # Python
