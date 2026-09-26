@@ -1,0 +1,13 @@
+# Data
+pandas
+pyarrow            # parquet read/write
+
+# Dashboard
+streamlit
+plotly             # charts (pairs well with streamlit)
+
+# Testing
+pytest
+
+# Config
+python-dotenv      # env vars / config, if needed
