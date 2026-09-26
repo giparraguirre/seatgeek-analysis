@@ -4,9 +4,9 @@
 
 The data is the free preview sample of the [SeatGeek dataset](https://rebrowser.net/products/datasets/seatgeek) published by Rebrowser. The full field reference, distributions and license terms are in [data/raw/DATASET_README.md](data/raw/DATASET_README.md).
 
-The raw files in `data/raw/` are git-ignored; only that reference file is tracked. To reproduce, download the dataset from Rebrowser ([GitHub](https://github.com/rebrowser/seatgeek-dataset), [HuggingFace](https://huggingface.co/datasets/rebrowser/seatgeek-dataset) or [Zenodo](https://doi.org/10.5281/zenodo.18854665)) into `data/raw/`.
+The raw data files (parquet/csv) in `data/raw/` are git-ignored; that reference file and each table's `schema.json` are tracked. To reproduce, download the dataset from Rebrowser ([GitHub](https://github.com/rebrowser/seatgeek-dataset), [HuggingFace](https://huggingface.co/datasets/rebrowser/seatgeek-dataset) or [Zenodo](https://doi.org/10.5281/zenodo.18854665)) into `data/raw/`.
 
-| Table | Folder | Layout | Rows in this sample |
+| Table | Folder | Layout | Raw rows (before dedup) |
 | --- | --- | --- | --- |
 | Events | `events/` | one file per day, last 30 days | 1,733 |
 | Event listings | `event-listings/` | one file per day, up to 1,000 rows each, last 30 days | 30,000 |
