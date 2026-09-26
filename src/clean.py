@@ -1,4 +1,16 @@
-"""Clean the raw SeatGeek tables: masked columns, dtypes, nulls, duplicates."""
+"""Clean the raw SeatGeek tables: masked columns, dtypes, nulls, duplicates.
+
+Deliberately out of scope (analysis-stage decisions, not cleaning):
+- Joins between tables (see join_tables.py).
+- dateTbd events: their datetimeUtc is a placeholder; filter them in analysis.
+- Unmatched listings: only ~13% of listings have an events row; all are kept.
+- Array columns (performerIds, seats) stay as numpy arrays; explode downstream.
+- Partly masked columns: only columns that are 100% [PREMIUM] are dropped. A
+  column with a few lingering [PREMIUM] values (e.g. from a paid or unlocked
+  dataset) gets those values set to NA but stays a string column, so .mean()
+  or .sum() would fail or misbehave. If that day comes, add a numeric-coercion
+  step (pd.to_numeric) for the affected columns here.
+"""
 
 import pandas as pd
 
