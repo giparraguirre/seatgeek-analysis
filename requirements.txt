@@ -11,3 +11,7 @@ pytest
 
 # Config
 python-dotenv      # env vars / config, if needed
+
+# Notebook (notebooks/exploration.ipynb)
+matplotlib
+ipykernel
