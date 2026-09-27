@@ -3,8 +3,8 @@ pandas
 pyarrow            # parquet read/write
 
 # Dashboard
-streamlit
-plotly             # charts (pairs well with streamlit)
+streamlit>=1.64      # tested version; needs width="stretch"
+plotly>=7.1         # tested version; needs marker cornerradius
 
 # Testing
 pytest
