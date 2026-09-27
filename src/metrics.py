@@ -138,3 +138,24 @@ def overview_counts(
         "venues": len(venues),
         "listings": len(listings),
     }
+
+
+def daily_new_events(events: pd.DataFrame) -> pd.DataFrame:
+    """New events per day (by _firstSeenAt), one row per day in the window,
+    including days with zero. hitExportCap flags days at the 1,000-row/day
+    export cap, where the true count of new events is likely higher.
+
+    Aug 31 is the day traced during the listings-to-events join investigation
+    (README's "Most listings do not join to an event"): it hits the cap, and
+    a contiguous block of eventIds from that period has no matching event row.
+    """
+    day = events["_firstSeenAt"].dt.floor("D")
+    full_range = pd.date_range(day.min(), day.max(), freq="D")
+    counts = (
+        day.value_counts()
+        .reindex(full_range, fill_value=0)
+        .rename_axis("day")
+        .reset_index(name="newEvents")
+    )
+    counts["hitExportCap"] = counts["newEvents"] >= 1000
+    return counts
