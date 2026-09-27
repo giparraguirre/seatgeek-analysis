@@ -51,10 +51,16 @@ def add_deal_labels(listings: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def _share(count: pd.Series) -> pd.Series:
+    """count / count.sum(), without dividing by zero on an empty input."""
+    total = count.sum()
+    return count / total if total else count.astype("float64")
+
+
 def _mix(series: pd.Series, name: str) -> pd.DataFrame:
     """Counts and share of total for each value, most common first."""
     out = series.value_counts().rename_axis(name).reset_index(name="count")
-    out["share"] = out["count"] / out["count"].sum()
+    out["share"] = _share(out["count"])
     return out
 
 
@@ -73,7 +79,7 @@ def deal_quality_distribution(listings: pd.DataFrame) -> pd.DataFrame:
     )
     quality = [DEAL_BUCKET_LABELS[b] for b in QUALITY_BUCKETS]
     out["isQualityTier"] = out["dealBucketLabel"].isin(quality)
-    out["share"] = out["count"] / out["count"].sum()
+    out["share"] = _share(out["count"])
     return out
 
 
@@ -104,7 +110,7 @@ def deal_quality_by_marketplace(listings: pd.DataFrame) -> pd.DataFrame:
         .reset_index(name="count")
     )
     out["n"] = out.groupby("marketplace")["count"].transform("sum")
-    out["share"] = out["count"] / out["n"]
+    out["share"] = _share(out["count"]) if out.empty else out["count"] / out["n"]
     return out
 
 
@@ -121,7 +127,9 @@ def marketplace_quality_coverage(listings: pd.DataFrame) -> pd.DataFrame:
         .reset_index()
         .sort_values("n_listings", ascending=False, ignore_index=True)
     )
-    out["quality_tier_share"] = out["n_quality_tier"] / out["n_listings"]
+    out["quality_tier_share"] = (
+        out["n_quality_tier"] / out["n_listings"] if len(out) else out["n_listings"].astype("float64")
+    )
     return out
 
 

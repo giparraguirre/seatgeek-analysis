@@ -10,6 +10,11 @@ RAW_DIR = Path(__file__).resolve().parents[1] / "data" / "raw"
 def _read_daily_snapshots(table_dir: Path) -> pd.DataFrame:
     """Concatenate every daily parquet file in <table_dir>/data/."""
     files = sorted((table_dir / "data").glob("*.parquet"))
+    if not files:
+        raise FileNotFoundError(
+            f"No daily parquet files found in {table_dir / 'data'}. "
+            "Download the dataset into data/raw/ (see the README's Data section)."
+        )
     return pd.concat((pd.read_parquet(f) for f in files), ignore_index=True)
 
 
