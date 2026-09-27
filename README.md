@@ -1,5 +1,17 @@
 # SeatGeek Analysis
 
+![Dashboard overview and new-events-per-day trend](outputs/figures/dashboard-overview.png)
+
+<details>
+<summary>More screenshots</summary>
+
+![Deal quality](outputs/figures/dashboard-deal-quality.png)
+![Marketplace mix](outputs/figures/dashboard-marketplace-mix.png)
+![Delivery and seat type](outputs/figures/dashboard-delivery-seat-type.png)
+![Deal quality by marketplace](outputs/figures/dashboard-deal-quality-by-marketplace.png)
+
+</details>
+
 ## Data
 
 The data is the free preview sample of the [SeatGeek dataset](https://rebrowser.net/products/datasets/seatgeek) published by Rebrowser. The full field reference, distributions and license terms are in [data/raw/DATASET_README.md](data/raw/DATASET_README.md).
