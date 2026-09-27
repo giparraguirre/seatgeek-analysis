@@ -35,6 +35,8 @@ The raw data files (parquet/csv) in `data/raw/` are git-ignored; that reference 
 
 **This sample's category shares diverge from the full dataset's published baselines**, likely due to day-to-day sampling variance rather than an error (verified against raw parquet and CSV): electronic delivery is 93.5% here versus 80.8% in the full 98.7M-row dataset, and assigned-seat share is 15.1% versus a 23% fill rate. Treat this sample's percentages as descriptive of these 30,000 rows, not as an estimate of the full dataset.
 
+The join-rate trace and the seats spot-check above are worked through cell by cell, with real output, in [notebooks/exploration.ipynb](notebooks/exploration.ipynb).
+
 **Aside (not shown on the dashboard):** within the 4,000 listings that do join to an event — all NBA — Cleveland (1,103 listings), the Lakers (735), and Dallas (708) lead in listing volume. Interesting, but it reflects NBA demand specifically, not the marketplace as a whole, so it's called out here rather than presented as a general "top performers" panel.
 
 Things to know:
