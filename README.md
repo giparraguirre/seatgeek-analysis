@@ -27,3 +27,14 @@ Things to know:
 ### License and citation
 
 Free for research and non-commercial use with attribution. Cite as: Rebrowser, *SeatGeek Events & Ticket Listings Dataset*, 2026, https://rebrowser.net/products/datasets/seatgeek. See the [license terms](https://rebrowser.net/free-datasets-for-research#license).
+
+## Run
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run dashboard/app.py
+```
+
+Activate the virtual environment first. If `streamlit` resolves to another install (for example Anaconda's older version), the dashboard fails with a `TypeError`; `python -m streamlit run dashboard/app.py` inside the venv always uses the right one.
