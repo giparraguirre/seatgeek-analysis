@@ -13,6 +13,18 @@ The raw data files (parquet/csv) in `data/raw/` are git-ignored; that reference 
 | Performers | `performers/` | single file | 257 |
 | Venues | `venues/` | single file | 193 |
 
+## Key findings
+
+**Market structure is concentrated and mostly digital.** `exchange` accounts for 93.2% of all listings — the resale activity in this sample funnels through one channel. Ticketing has largely moved past physical delivery: 93.5% of listings are electronic, versus 0.03% (10 listings) still shipped. GA/unassigned listings (84.9%) outnumber specific assigned seats more than 5 to 1.
+
+**Marketplace choice barely predicts deal quality.** Across the three marketplaces with meaningful volume, the share of listings in a genuine quality tier (Amazing/Great/Good/Okay) is nearly identical: `exchange` 84%, `open` 84%, `open_marketplace` 85%. Whatever drives deal quality in this sample, it isn't which marketplace the listing sits on.
+
+**The low events-listings join rate has a specific, traceable cause.** Only 13% of listings (4,000 of 30,000) match an event record, and every matched event is an NBA game. Tracing the unmatched event IDs shows this isn't random: a daily export on Aug 31 hit its 1,000-row cap mid-batch, and roughly 72% of the unmatched IDs cluster in one contiguous block from that day — visible directly as the spike in "New events per day" on the dashboard. The rest are events first seen before this sample's 30-day window began.
+
+**This sample's category shares diverge from the full dataset's published baselines**, likely due to day-to-day sampling variance rather than an error (verified against raw parquet and CSV): electronic delivery is 93.5% here versus 80.8% in the full 98.7M-row dataset, and assigned-seat share is 15.1% versus a 23% fill rate. Treat this sample's percentages as descriptive of these 30,000 rows, not as an estimate of the full dataset.
+
+**Aside (not shown on the dashboard):** within the 4,000 listings that do join to an event — all NBA — Cleveland (1,103 listings), the Lakers (735), and Dallas (708) lead in listing volume. Interesting, but it reflects NBA demand specifically, not the marketplace as a whole, so it's called out here rather than presented as a general "top performers" panel.
+
 Things to know:
 
 - **Sample, not the full dataset.** Listings are 0.03% of the 98.7M full records, and their category shares differ a lot from the full-dataset figures on the Rebrowser page. Here `sg_app` delivery is 6.5% (19.0% in the full dataset), `electronic` is 93.5% (80.8%), `exchange` is 93.2% (97.3%), and listings with assigned seats are 15.1% (23% fill rate). This is not a code error: the seats counts match when read directly from the parquet and CSV files, and the daily shares swing widely (assigned seats range from 0.9% to 100% per day), most likely because each day's 1,000 listings come from a small set of events (555 distinct events across 30 days). Do not compare dashboard percentages to the full-dataset baseline.
